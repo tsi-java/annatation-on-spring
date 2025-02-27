@@ -1,5 +1,7 @@
 package sk.ex.plugins;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.Core;
 import sk.ex.Plugins;
 import sk.ex.core.bukkit;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import static sk.ex.main.AllVersion;
 
+
+@Component("skysetplugin")
 public class skPlugin implements Plugins {
     private String Version = "1.21";
     private String Name = "skPlugin";

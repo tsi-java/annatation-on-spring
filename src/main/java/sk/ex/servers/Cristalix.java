@@ -1,5 +1,8 @@
 package sk.ex.servers;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.Core;
 import sk.ex.Plugins;
 import sk.ex.core.bukkit;
@@ -11,6 +14,12 @@ import sk.ex.plugins.sitPlugin;
 
 import sk.ex.server;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+
+@Scope("singleton")
+@Component("cristalix")
 public class Cristalix implements server {
     private String Name="Cristalix";
     private sk.ex.Core[] Cores = new Core[2];
@@ -23,7 +32,7 @@ public class Cristalix implements server {
     private String DateUpdate="21.01.25";
 
     public Cristalix(){
-        init();
+
     }
 
     @Override
@@ -34,6 +43,15 @@ public class Cristalix implements server {
 
     }
 
+    @PreDestroy
+    private void stop(){
+        System.out.println("-----------------------------------------");
+        System.out.println(this.Name + "  выключен" );
+        System.out.println("-----------------------------------------");
+    }
+
+
+    @PostConstruct
     private void init(){
         plugins[0]=new eggPlugin();
         plugins[1]=new chatPlugin();

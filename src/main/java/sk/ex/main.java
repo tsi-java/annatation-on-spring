@@ -1,7 +1,6 @@
 package sk.ex;
 
-import sk.ex.servers.Cristalix;
-import sk.ex.servers.SkySet;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +15,14 @@ public class main {
     }
 
     public static void main(String[] args){
-        server server = new SkySet();
+        ClassPathXmlApplicationContext contexts = new ClassPathXmlApplicationContext("AplicationContext.xml");
+        server server = contexts.getBean("skyset", sk.ex.server.class);
         server.Start();
         server.Update("30.11.27");
         server.warning("слишком поздний апдейт,время еще не пришло");
-        server server2 = new Cristalix();
+        server server2 = contexts.getBean("cristalix", sk.ex.server.class);;
         server2.Start();
         new coreAbout(server.getCores());
+        contexts.close();
     }
 }

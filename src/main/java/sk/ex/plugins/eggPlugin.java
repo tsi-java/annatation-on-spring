@@ -1,5 +1,7 @@
 package sk.ex.plugins;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.*;
 import sk.ex.core.bukkit;
 import sk.ex.core.paper;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import static sk.ex.main.AllVersion;
 
+
+@Component("eggplugin")
 public class eggPlugin implements Plugins {
     private String Version = "1.16";
     private String Name = "eggPlugin";

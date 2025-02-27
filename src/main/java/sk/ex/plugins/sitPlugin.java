@@ -1,8 +1,11 @@
 package sk.ex.plugins;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.Core;
 import sk.ex.Plugins;
 import sk.ex.core.bukkit;
+import sk.ex.core.paper;
 import sk.ex.core.spigot;
 
 import java.util.ArrayList;
@@ -10,6 +13,8 @@ import java.util.List;
 
 import static sk.ex.main.AllVersion;
 
+
+@Component("sitplugin")
 public class sitPlugin implements Plugins {
     private String Version = "1.7";
     private String Name = "sitPlugin";

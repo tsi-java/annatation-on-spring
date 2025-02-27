@@ -1,17 +1,28 @@
 package sk.ex.servers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.Core;
 import sk.ex.Plugins;
 import sk.ex.core.bukkit;
 import sk.ex.core.paper;
 import sk.ex.core.spigot;
 import sk.ex.plugins.chatPlugin;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import sk.ex.plugins.skPlugin;
 import sk.ex.server;
 
 
 
+
+@Component("skyset")
+@Scope("singleton")
 public class SkySet implements server {
     private String Name="SkySet";
     private String Version="1.21";
@@ -24,7 +35,6 @@ public class SkySet implements server {
     private String DateUpdate="29.1.25";
 
     public SkySet(){
-        init();
     }
     @Override
     public void warning(String warn){
@@ -34,6 +44,7 @@ public class SkySet implements server {
 
     }
 
+    @PostConstruct
     private void init(){
         plugins[0]=new skPlugin();
         plugins[1]=new chatPlugin();
@@ -42,6 +53,15 @@ public class SkySet implements server {
         Cores[1] = new spigot();
         Cores[2] = new paper();
     }
+
+    @PreDestroy
+    private void stop(){
+        System.out.println("-----------------------------------------");
+        System.out.println(this.Name + "  выключен" );
+        System.out.println("-----------------------------------------");
+    }
+
+
     @Override
     public int getPatch() {
         return Patch;

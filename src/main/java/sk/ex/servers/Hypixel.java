@@ -1,5 +1,8 @@
 package sk.ex.servers;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import sk.ex.Core;
 import sk.ex.Plugins;
 import sk.ex.core.bukkit;
@@ -10,6 +13,11 @@ import sk.ex.plugins.eggPlugin;
 import sk.ex.plugins.sitPlugin;
 import sk.ex.server;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@Scope("singleton")
+@Component("Hypixel")
 public class Hypixel  implements server {
     private String Name="Hypixel";
     private String Version="1.8";
@@ -22,7 +30,6 @@ public class Hypixel  implements server {
     private String DateUpdate="14.12.24";
 
     public Hypixel(){
-        init();
     }
 
     @Override
@@ -33,6 +40,14 @@ public class Hypixel  implements server {
 
     }
 
+    @PreDestroy
+    private void stop(){
+        System.out.println("-----------------------------------------");
+        System.out.println(this.Name + "  выключен" );
+        System.out.println("-----------------------------------------");
+    }
+
+    @PostConstruct
     private void init(){
         plugins[0]=new eggPlugin();
         plugins[1]=new chatPlugin();
